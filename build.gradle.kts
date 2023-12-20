@@ -37,6 +37,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

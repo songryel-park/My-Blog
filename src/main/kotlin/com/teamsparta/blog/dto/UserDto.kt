@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 
 data class UserRequestDto(
-        var id: Long?,
+        var userId: Long?,
 
         @field:NotBlank
         @field:Pattern(
@@ -29,8 +29,7 @@ data class UserRequestDto(
     val password: String
         get() = _password!!
 
-    fun toEntity(): User =
-            User(id, username, password)
+    fun toEntity(): User = User(userId, username, password)
 }
 
 data class LoginDto(
@@ -46,5 +45,4 @@ data class LoginDto(
         get() = _password!!
 }
 
-data class UserResponse(val id: Long, val username: String) {
-}
+data class UserResponse(val id: Long, val username: String) {}

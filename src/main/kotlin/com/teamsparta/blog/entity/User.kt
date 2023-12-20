@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor
 @Entity
 @NoArgsConstructor
 @Table(
-        uniqueConstraints = [UniqueConstraint(name = "uk_member_login_id", columnNames = ["loginId"])]
+        uniqueConstraints = [UniqueConstraint(name = "uk_user_login_id", columnNames = ["loginId"])]
 )
 class User(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null,
 
         @Column(nullable = false, length = 30, updatable = false)
@@ -20,6 +20,5 @@ class User(
         @Column(nullable = false, length = 100)
         var password: String
 ) {
-    fun toUserDto(): UserResponse =
-            UserResponse(id!!, username)
+        fun toUserDto(): UserResponse = UserResponse(id!!, username)
 }

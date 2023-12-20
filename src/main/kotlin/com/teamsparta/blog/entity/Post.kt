@@ -1,33 +1,36 @@
 package com.teamsparta.blog.entity
 
-import com.teamsparta.blog.dto.PostResponse
+import com.teamsparta.blog.dto.PostResopnse
 import jakarta.persistence.Entity
 import jakarta.persistence.*
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import lombok.NoArgsConstructor
 
 @Entity
+@NoArgsConstructor
 class Post(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long? = null,
 
-        @Column(nullable = false)
-        val title: String,
+        @Column(nullable = false, length = 30)
+        var title: String,
+
+        @Column(nullable = false, length = 10, updatable = false)
+        var username: String,
 
         @Column(nullable = false)
-        val username: String,
+        var contents: String
+): Time() {
+        @OneToMany(mappedBy = "board", cascade = [CascadeType.ALL])
+        @OrderBy("created_at desc")
+        var comments: MutableList<Comment> = mutableListOf()
 
-        @Column(nullable = false)
-        val contents: String,
-
-        @Column(nullable = false)
-        @Temporal(TemporalType.DATE)
-        val date: LocalDate,
-) {
-        private fun LocalDate.formatDate(): String =
-                this.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
-
-        fun toPostDto(): PostResponse =
-                PostResponse(id!!, title, username, contents, date)
+        fun update(title: String, username: String, contents: String) {
+                this.title = title
+                this.username = username
+                this.contents = contents
+        }
+        fun addComment(comment: Comment) {
+                this.comments.add(comment)
+        }
 }
