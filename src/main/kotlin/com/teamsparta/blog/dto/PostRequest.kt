@@ -8,11 +8,15 @@ data class CreateRequest(
     private val title: String,
 
     @field:NotBlank
+    private val username: String,
+
+    @field:NotBlank
     private val contents: String
 ) {
     fun toDto(): PostDto{
         return PostDto(
             _title = title,
+            _username = username,
             _contents = contents
         )
     }

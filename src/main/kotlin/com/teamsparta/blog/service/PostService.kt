@@ -22,8 +22,8 @@ class PostService(private val postRepository: PostRepository) {
     }
 
     @Transactional
-    fun createPost(username: String, dto: PostDto): PostDto {
-        val post = Post(dto._title, username, dto._contents)
+    fun createPost(dto: PostDto): PostDto {
+        val post = Post(dto._title, dto._username, dto._contents)
         val savedPost = postRepository.save(post)
         return PostDto.fromEntity(savedPost)
     }
