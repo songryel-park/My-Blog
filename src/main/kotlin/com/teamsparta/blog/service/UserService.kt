@@ -31,7 +31,7 @@ class UserService(private val userRepository: UserRepository,
         return "회원가입 되었습니다"
     }
 
-    // 로그인 - 토큰 발행
+    // 로그인 - 토큰발행
     fun login(loginDto: LoginDto): TokenInfo {
         val authenticationToken = UsernamePasswordAuthenticationToken(loginDto.username, loginDto.password)
         val authentication = authenticationManagerBuilder.`object`.authenticate(authenticationToken)
