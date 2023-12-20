@@ -2,9 +2,10 @@ package com.teamsparta.blog.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.teamsparta.blog.entity.Post
+import jakarta.validation.constraints.NotBlank
 import java.time.LocalDateTime
 
-data class PostRequestDto(
+data class PostDto(
         val postId: Long?,
 
         @JsonProperty("title")
@@ -20,8 +21,8 @@ data class PostRequestDto(
         lateinit var updatedAt: LocalDateTime
 
         companion object {
-                fun fromEntity(post: Post): PostRequestDto {
-                        val dto = PostRequestDto(
+                fun fromEntity(post: Post): PostDto {
+                        val dto = PostDto(
                                 postId = post.id,
                                 _title = post.title,
                                 _username = post.username,
@@ -32,9 +33,9 @@ data class PostRequestDto(
                         return dto
                 }
 
-                fun fromEntities(posts: List<Post>): List<PostRequestDto> {
+                fun fromEntities(posts: List<Post>): List<PostDto> {
                         return posts.map {
-                                val dto = PostRequestDto(
+                                val dto = PostDto(
                                         postId = it.id,
                                         _title = it.title,
                                         _username = it.username,
