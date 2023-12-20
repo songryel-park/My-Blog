@@ -21,17 +21,13 @@ class UserService(private val userRepository: UserRepository,
                   private val jwtTokenProvider: JwtTokenProvider,
                   private val authentication: AuthenticationConfiguration) {
     fun signUp(userRequestDto: UserRequestDto): String {
-        // 회원 ID 중복 확인
         var user: User? = userRepository.findByUsername(userRequestDto.username)
-        //- 데이터베이스에 존재하는 닉네임을 입력한 채 회원가입 버튼을 누른 경우
         if (user != null) {
             throw InvalidInputException("중복된 ID입니다")
         }
 
-        //데이터 저장
         user = userRequestDto.toEntity()
         userRepository.save(user)
-
         return "회원가입 되었습니다"
     }
 
