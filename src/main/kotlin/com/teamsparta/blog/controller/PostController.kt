@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 class PostController(private val postService: PostService) {
-    @PostMapping("/posts")
+    @GetMapping("/posts")
     fun findAll(): List<PostDto> {
         val posts = postService.findAll()
         return posts
     }
 
-    @PostMapping("/posts/{postId}")
+    @GetMapping("/posts/{postId}")
     fun find(@PathVariable postId: Long): PostDto {
         val post = postService.findById(postId)
         return post
@@ -34,13 +34,13 @@ class PostController(private val postService: PostService) {
         return
     }
 
-    @PostMapping("/post/{postId}")
+    @PutMapping("/post/{postId}")
     fun update(@PathVariable postId: Long, @Valid @RequestBody request: UpdateRequest) {
         val post = postService.updatePost(request.toDto())
         return
     }
 
-    @PostMapping("/post/{posrId}")
+    @DeleteMapping("/post/{posrId}")
     fun delete(@PathVariable postId: Long) {
         postService.deletePost(postId)
         return
